@@ -15,6 +15,11 @@ sudo systemctl enable --now smbd
 echo "Creating Sambas directory at /shared..." > /dev/tty
 [[ -d /shared ]] || sudo mkdir /shared
 
+
+#setting permissions on /shared
+echo "Setting permissions on shared..." > /dev/tty
+sudo chmod -R ugo+w /shared
+
 #stop samba
 echo "Stopping Samba service..." > /dev/tty
 sudo systemctl stop smbd
