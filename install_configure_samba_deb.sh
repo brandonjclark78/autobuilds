@@ -55,7 +55,7 @@ fi
 
 #start samba
 echo "Starting Samba service..."
-sudo systemctl start smbd
+sudo systemctl restart smbd
 
 
 printf "Samba configured at: $(date):$(hostname)\n" >> samba_configured.txt
