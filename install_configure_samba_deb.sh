@@ -4,15 +4,19 @@
 #Do NOT put an open share into production, people.
 
 #update default repo and install samba
+echo "Updating repos and installing Samba..." > /dev/tty
 sudo apt-get update && sudo apt-get install -y samba
 
 #enable smb startup
+echo "Configuring Samba for service auto-start..." > /dev/tty
 sudo systemctl enable --now smbd
 
 #create /shared directory at root of filesystem if it doesn't exist
+echo "Creating Sambas directory at /shared..." > /dev/tty
 [[ -d /shared ]] || sudo mkdir /shared
 
 #stop samba
+echo "Stopping Samba service..." > /dev/tty
 sudo systemctl stop smbd
 
 #delete smb.conf
@@ -21,6 +25,7 @@ sudo systemctl stop smbd
 
 
 #recreate smb.conf with our "open" settings
+echo "Appending to smb.conf..." > /dev/tty
 sudo bash -c '{
     echo "  [shared]"
     echo "  path = /shared"
@@ -35,6 +40,7 @@ sudo bash -c '{
 
 
 #start samba
+echo "Starting Samba service..." > /dev/tty
 sudo systemctl start smbd
 
 
