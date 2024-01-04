@@ -43,8 +43,7 @@ contentToAdd='
 echo "Here is the content to add to smb.conf: $contentToAdd"
 
 # Check if the content already exists in smb.conf
-echo "Checking if smb.conf content already exists.  If not, will append."
-if ! grep -qF "$contentToAdd" /etc/samba/smb.conf; then
+if ! diff -q <(echo "$contentToAdd") /etc/samba/smb.conf &> /dev/null; then
     # If not, append the content to smb.conf using sudo
     echo "$contentToAdd" | sudo tee -a /etc/samba/smb.conf > /dev/null
     echo "Content added to smb.conf"
