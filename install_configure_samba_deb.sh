@@ -29,19 +29,29 @@ sudo systemctl stop smbd
 
 
 
-#recreate smb.conf with our "open" settings
-echo "Appending to smb.conf..." >
-sudo bash -c '{
-    echo "  [shared]"
-    echo "  path = /shared"
-    echo "  public = yes"
-    echo "  guest only = yes"
-    echo "  writable = yes"
-    echo "  force create mode = 0666"  
-    echo "  force directory mode = 0777"
-    echo "  browseable = yes"
-} >> /etc/samba/smb.conf'
+# Content to be added to smb.conf
+contentToAdd='
+[shared]
+  path = /shared
+  public = yes
+  guest only = yes
+  writable = yes
+  force create mode = 0666
+  force directory mode = 0777
+  browseable = yes
+'
+echo "Here is the content to add to smb.conf: $contentToAdd"
 
+# Check if the content already exists in smb.conf
+echo "Checking if smb.conf content already exists.  If not, will append."
+if ! grep -qF "$contentToAdd" /etc/samba/smb.conf; then
+    # If not, append the content to smb.conf using sudo
+    echo "$contentToAdd" | sudo tee -a /etc/samba/smb.conf > /dev/null
+    echo "Content added to smb.conf"
+else
+    # If the content already exists, print a message
+    echo "Content already exists in smb.conf"
+fi
 
 
 #start samba
