@@ -16,7 +16,7 @@ sudo systemctl enable --now smbd
 sudo systemctl stop smbd
 
 #delete smb.conf
-sudo rm /etc/samba/smb.conf
+#sudo rm /etc/samba/smb.conf
 
 
 
