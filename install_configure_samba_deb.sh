@@ -19,7 +19,12 @@ echo "Creating Sambas directory at /shared..."
 #setting permissions on /shared
 echo "Setting permissions on shared..."
 sudo chmod -R ugo+w /shared
+
+
 # Set default ACLs on the /shared directory
+echo "Installing package 'acl'"
+sudo apt-get update && sudo apt-get install -y acl
+echo "Setting default ACL on /shared"
 sudo setfacl -d -m u::rwx,g::rwx,o::rwx /shared
 
 
