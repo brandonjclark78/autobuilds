@@ -5,3 +5,4 @@ echo "Adding to GPG Keyring"
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 echo "Installing Vagrant"
 sudo apt update && sudo apt install vagrant
+vagrant plugin install vagrant-vmware-esxi
