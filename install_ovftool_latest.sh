@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#https://mikebosland.com/installing-ovftool/ < thanks mike
+
 #download latest version of vmware OVFtool to /shared
 curl -sSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" "https://developer.vmware.com/web/tool/ovf-tool/#latest" | grep -oP 'href="\K[^"]*(ovftool.*\-lin.x86_64.zip)[^"]*' | xargs -I {} wget {} -P /shared
 
