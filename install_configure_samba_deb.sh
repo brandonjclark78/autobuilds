@@ -19,6 +19,9 @@ echo "Creating Sambas directory at /shared..."
 #setting permissions on /shared
 echo "Setting permissions on shared..."
 sudo chmod -R ugo+w /shared
+# Set default ACLs on the /shared directory
+sudo setfacl -d -m u::rwx,g::rwx,o::rwx /shared
+
 
 #stop samba
 echo "Stopping Samba service..."
