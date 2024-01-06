@@ -73,3 +73,21 @@ if ! grep -q "^PATH=.*:$folder_path" /etc/environment; then
 else
     echo "Folder is already in the system-wide PATH."
 fi
+
+source /etc/environment
+
+folder_path="/usr/bin/vmware-ovftool/ovftool"
+
+# Check if the folder is not already in the PATH
+if ! grep -q "^PATH=.*:$folder_path" /etc/environment; then
+    # Add the folder to the PATH
+    echo "PATH=\$PATH:$folder_path" | sudo tee -a /etc/environment > /dev/null
+
+    # Apply the changes
+    source /etc/environment
+    echo "Folder added to the system-wide PATH."
+else
+    echo "Folder is already in the system-wide PATH."
+fi
+
+source /etc/environment
